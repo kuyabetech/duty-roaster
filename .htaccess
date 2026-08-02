@@ -1,0 +1,27 @@
+# =============================================
+# .htaccess - URL Rewriting
+# =============================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Redirect to index.php
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+    
+    # Redirect /login to /views/auth/login.php
+    RewriteRule ^login$ views/auth/login.php [L]
+    RewriteRule ^register$ views/auth/register.php [L]
+    RewriteRule ^dashboard$ views/dashboard/index.php [L]
+    RewriteRule ^admin$ views/dashboard/admin.php [L]
+    RewriteRule ^teacher$ views/dashboard/teacher.php [L]
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Error pages
+ErrorDocument 404 /404.php
+ErrorDocument 403 /403.php
+ErrorDocument 500 /500.php
